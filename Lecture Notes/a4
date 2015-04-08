@@ -1,0 +1,27 @@
+q2
+	flip a coin twice
+	random variables
+		x = the result of the first coin flip
+		y = the sum of the result of the two coin flips
+		z = x * y
+
+	Distribution Function
+		Pr(X = x) = Pr( w in S : X(w) = x )
+		Maps any real nuber 'x' to the real number of its probability
+		(Mapping of the sum of two dice flips)
+
+	DF - X
+		Pr(X = 0) = 1 / |S|
+		Pr(X = 1) = 1 / |S|
+
+	DF - Y
+		Pr(Y = 0) = 1 / 4
+		Pr(Y = 1) = 2 / 4
+		Pr(Y = 2) = 1 / 4
+
+	DF - Z
+		Pr(Z = 0) = | {0*0, 1*0, 0*1} | / |S|
+		Pr(Z = 1) = |{1*1}| / |S|
+
+	Independent?
+		Pr(X

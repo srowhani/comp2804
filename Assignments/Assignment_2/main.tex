@@ -1,0 +1,454 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Christian's Assignment Latex Template
+%
+% Inspired by Simon Pratt's LatexTemplate (github.com/spratt/LatexTemplate)
+% Modified by Christian Delahousse (christian.delahousse.ca)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+
+\usepackage{styles/Assignment}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{fancybox}
+
+\newcommand{\IN}{\mathbb{N}}
+\newcommand{\IZ}{\mathbb{Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Assignment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\CourseAndAssignmentName{COMP2804}{Assignment 2}
+\StudentNameAndNumber{Seena Rowhani}{100945353}
+
+\begin{document}
+%====================QUESTION 1 - Done ================
+
+\begin{question}
+See the top of the page.
+\end{question}
+
+%====================QUESTION 2 - Done ================
+\begin{question} \\ \\
+The functions $f : \IN \rightarrow \IN$ and $g : \IN \rightarrow \IN$ 
+are recursively defined as follows:
+\[ \begin{array}{lcll} 
+      f(0) & = & 1 , & \\ 
+      f(n) & = & g(n,f(n-1)) & \mbox{if $n \geq 1$,}  \\ 
+      g(m,0) & = & 0 & \mbox{if $m \geq 0$,} \\ 
+      g(m,n) & = & m + g(m,n-1) & \mbox{if $m \geq 0$ and $n \geq 1$.}
+   \end{array} 
+\] 
+Solve these recurrences for $f$, i.e., express $f(n)$ in terms of $n$.  
+Justify your answer. 
+\end{question}
+%==================Answer================
+\begin{answer}
+It's evident that the solution, expressed in terms of $n$, is $n!$. \textbf{This can be said because the function \textit{g(m,n)} will add \textit{m} to itself \textit{n} times, for every value of $n$ that occurs}.\newline I will prove that this is correct through induction. Since I say I can express $f(n)$ as $n!$, I will show that $f(n+1) = (n+1)!$ \\ 
+
+\textbf{But!} Before we do this, I must show that what I had stated about $g_{m,n} = m*n$ is indeed true. So before I make any statements about $f_{n}$. \\
+
+\textbf{Base Case} 
+\begin{align*}
+m&=1, n=2 \\
+g_{1,1} &= 1 + g_{1,0} \\
+        &= 1 + 0 = 1
+\end{align*}
+
+\textbf{Inductive Hypothesis} \\
+Assume that,
+$$ g_{m,n} = m\cdot n $$
+Let an integer, $k$ be equal to $n$\\ \\
+\textbf{Inductive Step}\\
+If I can show that $g_{m,k+1} = m\cdot(n+1)$, then I have proved this to be true. 
+\begin{align*}
+g_{m,k+1} &= m + g_{m, k} \\
+          &= m + m \cdot k \\
+          &= m \cdot (k+1)
+\end{align*}
+Because I have shown that this is true, I can proceed to my proof on function $f$. \\ \\
+\textbf{Base Case}
+$$f(0) = 1$$
+\textbf{Inductive Hypothesis} \\ For some integer $k$\dots $$f(k) = k!$$ If it can be argued that this is true for n, it must hold that it will be true for all values of $n$ that follow\dots \\ \\ \textbf{Inductive Step} \\ If it can be shown that\dots $$f(k+1) = (k+1)!$$ \dots then my proof is complete.
+\begin{align*}
+f(k+1) 
+&= g(k+1,f(k))\\
+&= (g(k+1, k!))\\
+&= (k+1)k! \\
+&= (k+1)! \\
+\end{align*}
+Therefore, through mathematical induction has it become evident that the recursive definition of $f_{n}$ is simply $n!$.
+\end{answer}
+
+
+%====================QUESTION 3 - Done==================
+\begin{question} \\ \\
+The function $f : \IN \rightarrow \IZ$ is defined by 
+\[ f(n) = 2n ( n-6) 
+\]
+for each integer $n \geq 0$. Derive a recursive form of this 
+function $f$. Show your work. 
+\end{question} 
+
+\begin{answer}
+	$f_{n} = 2n(n-6)$ can be expressed  as $f_{n} = (f_{n} + f{n-1}) - f_{n-1}$ allows us to express it in it's recursive form, so to speak \dots \\
+	
+	\textbf{Base Case} 
+	\\
+	$$ f_{1} = 1 $$
+	
+	
+	\begin{align*}
+	 f_{n} &= 2n(n-6) \\
+	 f_{n - 1} &= 2(n-1)( (n - 1) - 6 )\\
+	 f_{n} &= f_{n} + f_{n-1} - f_{n-1} \\
+	 f_{n} &= \{ 2n(n-6) + 2(n-1)( (n - 1) - 6 ) \} - f_{n-1} \\
+	\end{align*}
+	
+This statement algebraically proves itself to be true, as I have essentially just added $0$ to the original function (which does not affect its value).
+\end{answer}
+
+
+
+%====================QUESTION 4 - Done===================
+\begin{question}  \\ \\
+The function $f : \IN^3 \rightarrow \IN$ is defined as follows: 
+\begin{align*}
+      f(k,n,0) &= k+n  \\
+      f(k,0,1) &= 0\\
+      f(k,0,2) &= 1  \\
+      f(k,0,i) &= k \\
+      f(k,n,i) &= f ( k , f(k,n-1,i) , i-1)
+\end{align*}
+Determine $f(2,3,2)$. Show your work. 
+\end{question} 
+
+\begin{answer}
+\begin{align*}
+f(2,3,2) &= f(2, f(2, 2, 2), 1) &_{f(2,2,2)}\\
+         &= f(2, 4, 1)  &_{f(2,4,1)}\\
+         &= 8
+\end{align*}
+
+\begin{align*}
+f(2,2,2) &= f(2, f(2,1,2), 1)  &_{f(2,1,2)}\\
+         &= f(2,2,1)\\
+         &= f(2, f(2,1,1),0) \\
+         &= 2 + f(2,1,1) \\
+         &= 2 + f(2, f(2,0,1), 0) \\
+         &= 2 + f(2,0,0) \\
+         &= 2+ 2 \\
+         &= 4 \\
+\end{align*}
+\begin{align*}
+f(2,1,2) &= f(2, f(2,0,2),1)  &\\
+         &= f(2,1,1) \\
+         &= f(2, f(2,0,1), 0) \\
+         &= 2
+\end{align*}
+\begin{align*}
+f(2,4,1) &= f(2, f(2,3,1), 0) \\
+         &= 2 + f(2,3,1) \\
+         &= 2 + f(2, f(2,2,1), 0) \\
+         &= 2 + 2 + f(2, f(2,1,1), 0) \\
+         &= 2 + 2 + 2 + f(2, f(2,0,1), 0) \\
+         &= 2 + 2 + 2 + f(2,0,0) \\
+         &= 2 + 2 + 2 + 2 \\
+         &= 8
+\end{align*}
+Therefore, the function call of $f(2,3,2)$ will return $8$\dots
+\end{answer}
+
+%===============QUESTION 5 - Done================
+\begin{question} \\ \\ 
+A \emph{maximal run of ones} in a bitstring is a maximal consecutive
+substring of ones. For example, the bitstring $1100011110100111$
+has four maximal runs of ones: $11$, $1111$, $1$, and $111$. These 
+maximal runs have lengths $2$, $4$, $1$, and $3$, respectively. 
+
+Let $n \geq 1$ be an integer and let $B_n$ be the number of bitstrings 
+of length $n$ that do not contain any maximal run of ones of odd 
+length; in other words, every maximal run of ones in these bitstrings 
+has an even length.\\ \\
+\parbox{\linewidth}{
+\begin{itemize} 
+\item Determine $B_1$, $B_2$, and $B_3$. 
+\item Determine the value of $B_n$, i.e., express $B_n$ in terms of 
+      numbers that we have seen in class. Justify your answer. 
+      \emph{Hint:} Derive a recurrence. 
+\end{itemize}}
+\end{question} 
+
+\begin{answer}
+\begin{align*}
+B_{1} &= 1 \\
+B_{2} &= 2 \\
+B_{3} &= 3 \\
+B_{4} &= 5 \\
+B_{n} &= B_{n-1} + B_{n-2}
+\end{align*}
+
+If you put all of the strings of length $n$ in a matrix that does not contain any odd runs of $1$'s. The number of rows is going to be $B_{n}$, the number of columns will be $n$, and you would divide the matrix into two. If we fix the first bit in the first half to be 1, then you'd have bit strings of length $n-2$ left. \newline 
+
+For the bottom half, if we fix the first bit to be $0$, there would be $n-1$ characters to choose, therefore $B_{n} = B_{n-1} + B_{n-2}$. This is just \textbf{fibonacci}, but misplaced by one index. \\
+
+Therefore I can define the following: 
+$$B_{n} = fibonacci_{(n+1)}$$
+\end{answer}
+
+%===============QUESTION 6 - Done ================
+
+\begin{question} \\ \\
+Let $n \geq 1$ be an integer and let $S_n$ be the number of ways in which 
+$n$ can be written as a sum of $1$s and $2$s; the order in which the 
+$1$s and $2$s occur in the sum matters. For example, $S_3 = 3$, because 
+\[ 3 = 1 + 1 + 1 = 1 + 2 = 2 + 1 . 
+\] \\
+\parbox{\linewidth}{
+\begin{itemize} 
+\item Determine $S_1$, $S_2$, and $S_4$. 
+\item Determine the value of $S_n$, i.e., express $S_n$ in terms of 
+      numbers that we have seen in class. Justify your answer. 
+      \emph{Hint:} Derive a recurrence. 
+\end{itemize}}
+\end{question} 
+%==================Answer================
+\begin{answer}
+\begin{align*}
+S_{1} &= 1 \\
+S_{2} &= 2 \\
+S_{3} &= 3 \\ 
+S_{4} &= 5 \\
+S_{5} &= 8 \\
+S_{n} &= S_{n-1} + S_{n-2}
+\end{align*}
+
+Through the sample, it is also evident that the number of ways to rearrange the 1's and 2's is equivalent to the Fibonacci recursion. \\
+
+This is because every large block can be reduced into a subset of options. For example, $S_{3} = S_{2} + S{1} = 2 + 1 = 3$. This pattern can be repeated for any $n$, as each is composed 
+\end{answer}
+
+%===============QUESTION 7 - Done ================
+
+\begin{question} \\ \\
+Let $n$ be a positive integer and consider a $5 \times n$ board $B_n$
+consisting of $5n$ cells, each one having sides of length one. The top
+part of the figure below shows $B_{12}$.
+
+
+A \emph{brick} is a horizontal or vertical board consisting of 
+$2 \times 3 = 6$ cells; see the bottom part of the figure above.
+A \emph{tiling} of the board $B_n$ is a placement of bricks on the
+board such that \\ \\
+\parbox{\linewidth}{
+\begin{itemize}
+\item the bricks exactly cover $B_n$ and
+\item no two bricks overlap.
+\end{itemize}}
+\\
+The figure below shows a tiling of $B_{12}$.
+
+Let $T_n$ be the number of different tilings of the board $B_n$. \\  \\
+\parbox{\linewidth}{
+\begin{itemize} 
+\item Let $n \geq 6$ be a multiple of $6$. Determine the value of $T_n$.
+      Justify your answer. \emph{Hint:} Derive a recurrence.  
+\item Let $n$ be a positive integer that is not a multiple of $6$. 
+      Prove that $T_n = 0$. 
+\end{itemize}
+}
+\end{question} 
+
+\begin{answer}
+$n$ must be $\geq 6$, where $ n \% 6 = 0$. So in other words, $n$ must be completely divisible by 6. \\
+Our \textbf{base case} becomes \dots
+$$ f(6) = 2 $$
+
+For each block of 6, there are only \textbf{two ways they can be arranged}. This is because of the combinations of blocks that are 2 wide, and of those that are three wide, there is no combination of 2 + 3 that will add up to 6. Therefore, there are only two combinations of each. The combination of \textbf{two} three length blocks, and \textbf{three} two length blocks.\\
+
+Using the product rule we would have 2 * 2 * ... for every block that we have. We can express this in terms of n by describing each block as $\frac{1}{6}$ to the number of columns $n$\dots 
+\\
+Therefore there are:
+$$ 2^{n/6} $$ number of ways to arrange the tiles, \textit{for an $n$ which matches the above conditions}. \\
+
+We can express this as a recursion as follows:
+
+$$ T_{n} = 2\cdot T_{n-6} \qquad if(n\geq 6 \land n\%6==0) = 2^{n/6}$$
+
+This can be proven through mathematical \textbf{induction}\dots \\
+
+\textbf{Base Case}
+$$T_{6} = 6$$
+
+\textbf{Inductive Hypothesis} \\
+Let an integer, $k$, be equal to our $n$. If it can be shown that our function holds for a value $k+6$ \textit{(since every number has to be a multiple of 6)}, then it must hold it would work for all values of $k$ that are divisible by 6, and will therefore be true.  
+\begin{align*}
+T_{k}
+&= 2 * T_{n-6} \\
+&= 2^{k/6}
+\end{align*}
+
+\textbf{Inductive Step}
+\begin{align*}
+T_{k+6} &= 2 T_{k} \\
+        &= 2\cdot 2^{(k/6)} \\
+        &= 2^{k/6 + 1}
+\end{align*}
+
+Therefore, it can be seen that through the principles \textbf{mathematical induction} that for every integer, $k$ that is a multiple of $6$, the recursion, 
+$$T_{k} = 2\cdot T_{(k-6)}$$ holds indefinitely throughout the series.\\
+\end{answer}
+%====================QUESTION 8 - Done==================
+%Silly
+% 2*log2(n) - 1 for n thats a power of 2
+% silly(n) = silly(n/2) + n/2
+
+\begin{question}\\ \\
+Consider the following recursive algorithm $silly$, which takes as 
+input an integer $n \geq 1$ which is a power of $2$:
+
+\begin{quote}
+\begin{tabbing}
+{\bf if} $n=1$ \\
+{\bf then} drink one pint of beer \\
+{\bf else} \= {\bf if} $n=2$ \\
+           \> {\bf then} fart once \\
+           \> {\bf else} \= fart once; \\
+           \>            \> $silly(n/2)$; \\
+           \>            \> fart once \\
+           \> {\bf endif} \\
+{\bf endif}
+\end{tabbing}
+\end{quote}
+
+For $n$ a power of $2$, let $F(n)$ be the number of times you fart when
+running algorithm $silly(n)$. 
+\end{question}
+\begin{itemize}
+\item Determine the value of $F(n)$ and prove that your answer is correct. 
+      \emph{Hint:} Derive a recurrence. 
+\end{itemize} 
+
+%==================Answer 8 ======================
+\begin{answer}
+For every value of $n$, in which $n$ is equal to $2^{k}$ for some integer $k \geq 1$. To start, I must first witness a pattern\dots
+\begin{align*}
+Silly_{1}  &= 0\\
+Silly_{2}  &= 1\\
+Silly_{4}  &= 3\\
+Silly_{8}  &= 5\\
+Silly_{16} &= 7\\
+Silly_{32} &= 9
+\end{align*}
+
+I can show that the following recurrence will hold\dots
+
+\begin{align*}
+Silly_{(n)} &= Silly_{n/2} + 2 \\
+Silly_{(8)} &= Silly_{(4)} + 2 \\
+            &= Silly_{(2)} + 2 + 2 \\
+            &= Silly_{(1)} + 1 + 2 + 2 \\
+            &= 0 + 1 + 2 + 2 \\
+            &= 5
+\end{align*}
+
+I will now argue that $Silly_{n}$ can be expressed in terms of $n$ as:
+
+$$ Silly_{(n)} = 2log_{2}(n) - 1$$
+
+I can prove this to be true via induction \dots \\
+
+\textbf{Base Case}
+\begin{align*}
+    Silly_{1} = 0 \\
+    Silly_{2} = 1 \\
+\end{align*}
+
+\textbf{Inductive Hypothesis}\\
+Let $k$ be an integer, where\\ $k = n$ and $log_{2}(k) \in \emph{Z}$. \\
+Assume, 
+$$ Silly_{(k/2)} = 2\cdot log_{2} ((k/2)) - 1 $$
+\dots to be true.\\
+\textbf{Inductive Step}
+If it can be shown that, 
+$$Silly_{(k)} = Silly_{(k/2)} + 2 $$ then it should hold for all powers of two
+\begin{align*}
+Silly_{(k)}  &= Silly_{(k/2)} + 2\\
+             &= (2\cdot log_{2}(k/2) -1 )+ 2 \\
+             &= 2\cdot (log_{2}(k) - log_{2}(2) ) + 1 \\
+             &= 2\cdot (log_{2}(k) - 1 ) + 1 \\
+             &= 2\cdot log_{2}(k) + 1 - 2 \\
+             &= 2\cdot log_{2}(k) - 1 \\
+             &= Silly_{(k)}
+\end{align*}
+Therefore, it can be seen, through mathematical induction, that for all values of $n$, greater or equal to 1, as well as a power of 2 will follow the aforementioned formula in terms of $n$.
+\end{answer}
+
+%=================Question 9 ========================
+
+\begin{question} \\ \\
+Let $m \geq 1$ and $n \geq 1$ be integers. Consider $m$ horizontal lines 
+and $n$ non-horizontal lines such that  
+\begin{itemize} 
+\item no two of the non-horizontal lines are parallel, 
+\item no three of the $m+n$ lines intersect in one single point. 
+\end{itemize} 
+These lines divide the plane into regions (some of which are bounded and 
+some of which are unbounded). Denote the number of these regions by 
+$R_{m,n}$. From the figure below, you can see that $R_{4,3} = 23$. 
+
+
+\begin{itemize} 
+\item Derive a recurrence for the numbers $R_{m,n}$ and use it to prove 
+      that 
+      \[ R_{m,n} = 1 + m(n+1) + {{n+1} \choose 2} .  
+      \] 
+\end{itemize} 
+\end{question}
+
+%===============Answer=========================
+
+\begin{answer}
+When you remove a line, $n$, you decrease the number of regions by $(m+n)$. This is because for every n, it will intersect with all non horizontal and all horizontal lines; \textbf{because no two lines can be parallel}.\\
+Therefore the recursion can be encapsulated by the following expression:
+$$R_{m,n} = R_{m,n-1} + m + n $$
+To quickly verify that this recursion is accurate, we can test it against the given derivation in terms of $n$
+\begin{align*}
+R_{2, 2} &= R_{2,1} + 2 + 2 \\
+         &= R_{2,0} + 2 + 1 + 4 \\
+         &= 2 + 1 + 7 \\
+         &= 10 \\
+R_{2,2} &= 1 + 2(2+1) + {{2+1} \choose 2} \\
+        &= 1 + 6 + 3 \\
+        &= 10
+\end{align*}
+
+We can prove that this is true using induction, to show that if it indeed works for an assumed hypothesis, it should logically follow that all elements after that for some $n+1$. If we can show that this is true, then the statement is \textbf{completely rendered true} \\
+
+\textbf{Base Case}
+   $$ R_{m, 0} &= m + 1$$
+   
+\textbf{Inductive Hypothesis} \\
+Let an integer $k = n$, and assume that the following equality is true for all values of $k,m \geq 1$:
+$$R_{m,k} = R_{m,k-1} + m + k$$ 
+If I can express $R_{m,k} = 1 + m(k+1) { {k+1} \choose 2}$, then my hypothesis will be proven correct \dots \\
+\textbf{Inductive Step} 
+\begin{align*}
+    R_{m,k} &= R_{m,k-1} + m + k \\
+            &= (1 + m\cdot k + {k \choose 2}) + m + k \\
+            &= (1 + m\cdot k + \frac{k(k-1)}{2}) + m + k\\
+            &= 1 + m(k+1) + \frac{k(k-1)}{2} + \frac{2k}{2}\\
+            &= 1 + m(k+1) + \frac{k^{2} - k + 2k}{2} \\
+            &= 1 + m(k+1) + \frac{k^{2} + k}{2} \\
+            &= 1 + m(k+1) + \frac{k(k+1)}{2} \\
+            &= 1 + m(k+1) + { {k+1} \choose 2 } \\
+            &= R_{m,k}
+\end{align*}
+Therefore, it is evident through mathematical induction, that $R_{m,k}$ can indeed be expressed in the aforementioned recursion.
+\end{answer}
+
+
+\end{document}

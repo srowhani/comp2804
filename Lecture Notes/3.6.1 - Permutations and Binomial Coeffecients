@@ -1,0 +1,44 @@
+#Permutations and Binomial Coefficients
+Notes by: Seena Rowhani
+
+##Permutations of a Finite Set
+
+Let `S = {a,b,c}`...
+
+There's a simple way to calculate the amount of permutations.
+
+Suppose we place a certain S<sub>i</sub>. There are now `|S|-1` placement options left for ordering. We'd repeat this process until we've placed all our elements.
+
+Therefore, thereshould be `|S|!` amount of ways to arrange our ordered set.
+
+	n * (n-1) * ... * 1 === n!
+	
+Suppose we want to know how many `k` element subsets of set `S` we can have.
+
+The same process would follow, but we can't call it `n!` as we don't extend the series to 1.
+
+Using some algebra, we can deduce that the series of `k` element subsets of `S` would be the difference in the cardinality of our initial set, and the size we'd like to permutate to.
+
+`|A| = n * n-1 * n-2 * n-k+1`
+
+Since there's no good way to express this as a factorial, we'll multiply it by something that won't affect the result, but will make our answer more expressable.
+
+Since factorials extend to 1, we can set a _range_ to our factorial by denomination of our lower bound.
+
+Therefore, calculating `k` sized subsets from a `n` sized set can be achieved through:
+
+`n! / (n-k)!`
+
+This number is equivelent to <code><sub>n</sub>C<sub>k</sub>  * k!</code>
+
+The reason we multiple `k!` is to account for the different permutations of each subset permutation.
+
+Therefore::
+
+<code><sub>n</sub>C<sub>k</sub>  * k! === n! / (n-k)!</code>
+
+Think of this as a factorial of the range from `k to n`.
+
+A good application of this is counting the number of permutations of a set of cards you can recieve.
+
+Ex. In hold-em, you can recieve <code><sub>52</sub>C<sub>2</sub></code> different card permutations.

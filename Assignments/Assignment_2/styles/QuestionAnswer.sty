@@ -1,0 +1,17 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Question and Answer environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ProvidesPackage{QuestionAnswer}
+
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{dark-gray}{gray}{0.3}
+
+\newcounter{ques}
+\newenvironment{question}{
+  \stepcounter{ques}{
+    \noindent\bf Question \arabic{ques}: } \color{dark-gray}}{
+      \\\rule[2mm]{\linewidth}{0.2pt}}
+\newenvironment{answer}{}{\vspace{5mm}}
+

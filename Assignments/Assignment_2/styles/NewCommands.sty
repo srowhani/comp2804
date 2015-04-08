@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% New commands for common Computer Science notation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ProvidesPackage{NewCommands}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% From Christian Delahousse
+\newcommand{\unsure}{\scalebox{3}{\textbf{?}}} %Question mark
+
+\newcommand\halmos{
+  \hfill\setlength\fboxrule{1.1pt}
+    \setlength\fboxsep{0pt}\fbox{\phantom{\rule{5pt}{5pt}}}} %QED
+
+\newcommand{\p}[1]{Pr\left(#1\right)} %Probability
+\newcommand{\Size}[1]{\left\vert{#1}\right\vert} %Cardinality
+\newcommand{\e}[1]{\mathbb{E}\left(#1\right)} %Expected value
+
+% Modified from John Howat
+\renewcommand{\implies}{\rightarrow}
+\newcommand{\same}{\leftrightarrow}
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+\newcommand{\cross}{\times}
+\newcommand{\xor}{\oplus}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\BigOh}[1]{O\!\left(#1\right)}
+\newcommand{\LittleOh}[1]{o\!\left(#1\right)}
+\newcommand{\BigOmega}[1]{\Omega\!\left(#1\right)}
+\newcommand{\LittleOmega}[1]{\omega\!\left(#1\right)}
+\newcommand{\BigTheta}[1]{\Theta\!\left(#1\right)}
